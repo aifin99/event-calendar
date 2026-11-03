@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>イベントカレンダー</title>
+<link rel="stylesheet" href="style.css?v=1">
+</head>
+<body>
+<div class="wrap">
+  <header class="topbar">
+    <h1><span class="app">イベントカレンダー</span></h1>
+    <button type="button" class="menu-btn" id="menu-btn" aria-label="メニュー" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="menu" id="menu" hidden>
+      <button type="button" id="tab-calendar" class="active">カレンダー</button>
+      <button type="button" id="tab-register">イベント登録</button>
+    </nav>
+  </header>
+
+  <section id="panel-calendar" class="panel active">
+    <div class="msg" id="cal-msg"></div>
+    <div class="month-nav">
+      <button type="button" id="prev" aria-label="前の月">‹</button>
+      <span class="label" id="month-label"></span>
+      <button type="button" id="next" aria-label="次の月">›</button>
+    </div>
+    <div class="legend"><span class="sw zoom"></span>ZOOM　<span class="sw venue"></span>会場</div>
+    <table class="grid">
+      <thead><tr>
+        <th class="sun">日</th><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th class="sat">土</th>
+      </tr></thead>
+      <tbody id="grid-body"></tbody>
+    </table>
+    <h2 id="list-title"></h2>
+    <div id="list"></div>
+  </section>
+
+  <section id="panel-detail" class="panel">
+    <button type="button" class="back-btn" id="d-back">‹ カレンダーに戻る</button>
+    <div class="msg" id="d-msg"></div>
+    <div id="detail"></div>
+  </section>
+
+  <section id="panel-register" class="panel">
+    <h2 class="page-title" id="r-title">イベント登録</h2>
+    <form id="register-form" class="form" autocomplete="off" novalidate>
+      <div class="field"><label for="r-date">日付<span class="req">必須</span></label><input type="date" id="r-date"></div>
+      <div class="field"><label for="r-time">開始時刻<span class="req">必須</span></label><input type="time" id="r-time"></div>
+      <div class="field">
+        <label class="check"><input type="checkbox" id="r-zoom">ZOOM（Web）で開催</label>
+        <div class="hint">チェックすると場所に「ZOOM」が入り、カレンダーで青く表示されます</div>
+      </div>
+      <div class="field"><label for="r-place">場所</label><input type="text" id="r-place" placeholder="会場名 ／ ZOOM"></div>
+      <div class="field">
+        <label for="r-address" id="r-address-label">住所／ZOOM の URL</label>
+        <input type="text" id="r-address" inputmode="url" placeholder="住所 ／ https://zoom.us/j/…">
+        <div class="hint">会場なら住所（地図が開けます）、ZOOM なら参加用の URL</div>
+      </div>
+      <div class="field"><label for="r-organizer">主催者</label><input type="text" id="r-organizer"></div>
+      <div class="field"><label for="r-title-input">イベント名<span class="req">必須</span></label><input type="text" id="r-title-input"></div>
+      <div class="field">
+        <label for="r-flyer">チラシ・広告</label>
+        <div class="hint" id="r-flyer-current" hidden>今の画像はそのまま残ります。新しい画像を選ぶと差し替えます</div>
+        <input type="file" id="r-flyer" accept="image/*">
+        <div class="hint">JPEG / PNG の画像。PDF は画像に書き出してから選んでください</div>
+        <div class="msg" id="r-flyer-msg"></div>
+        <img id="r-preview" class="preview" alt="画像のプレビュー" hidden>
+      </div>
+      <div class="field" id="r-pass-field" hidden>
+        <label for="r-pass">合言葉<span class="req">必須</span></label><input type="text" id="r-pass">
+      </div>
+      <button type="submit" class="btn" id="r-submit">保存</button>
+      <button type="button" class="btn sub" id="r-cancel" hidden>編集をやめる</button>
+      <div class="msg" id="r-msg"></div>
+      <div class="delete-area" id="r-delete-area" hidden>
+        <button type="button" class="btn danger" id="r-delete">このイベントを削除する</button>
+        <div class="delete-confirm" id="r-delete-confirm" hidden>
+          本当に削除しますか？ カレンダーから消えます（申込の記録と画像のファイルは残ります）。
+          <button type="button" class="btn danger" id="r-delete-yes">削除する</button>
+          <button type="button" class="btn sub" id="r-delete-no">やめる</button>
+        </div>
+        <div class="msg" id="r-delete-msg"></div>
+      </div>
+    </form>
+  </section>
+</div>
+
+<script src="config.js"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
