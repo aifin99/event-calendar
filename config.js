@@ -1,4 +1,4 @@
 // 画面が使う API（GAS Web アプリの /exec）の URL。デプロイID は イベントカレンダー\README.md と同じ
 window.EVENT_CONFIG = {
-  apiUrl: "https://script.google.com/macros/s/DEPLOYMENT_ID/exec"
+  apiUrl: "https://script.google.com/macros/s/AKfycbzPoLQJc-FZjZch7iJqalherAACGl6K74AcIhZk8jiEfzDz3MnvbkIQqr0CMMpoyt9f/exec"
 };
