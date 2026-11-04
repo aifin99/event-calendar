@@ -319,6 +319,14 @@
 
   function renderDetail(body, s, detail) {
     if (s.address) body.appendChild(whereBox(s.address));
+    // メモ①・②：住所・URL の下、画像の上。空のメモは見出しごと出さない。textContent で入れる（HTML は解釈しない・リンクにしない）
+    [['メモ①', s.memo1], ['メモ②', s.memo2]].forEach(function (m) {
+      if (!m[1]) return;
+      var memo = el('div', 'memo');
+      memo.appendChild(el('h3', '', m[0]));
+      memo.appendChild(el('div', 'memo-body', m[1]));
+      body.appendChild(memo);
+    });
     if (detail.flyer) {
       var img = el('img', 'flyer');
       img.alt = 'チラシ・広告';
@@ -359,6 +367,17 @@
 
   // ---- 編集（詳細ページ右上の「編集」→ 登録フォームに今の内容を入れて開く。合言葉は「更新する」「削除」のときにサーバーで照合） ----
   function openEdit(s) {
+    // 詳細の読み込み前（カレンダーの情報だけで出した見出し）の「編集」：メモ①・②を持っていないので、
+    // 先に詳細を取ってから開く（空のまま開いて更新するとメモが消えるため）
+    if (s.memo1 == null || s.memo2 == null) {
+      call('getDetail', [s.id], function (res) {
+        if (!res || !res.ok) { setMsg($('d-msg'), (res && res.reason) || '編集画面を開けませんでした', 'error'); return; }
+        openEdit(res.event);
+      }, function (err) {
+        setMsg($('d-msg'), '編集画面を開けませんでした：' + err, 'error');
+      });
+      return;
+    }
     call('getFormOptions', [], function (opt) {
       state.needsPassphrase = !!(opt && opt.needsPassphrase);
       state.view = 'register';
@@ -484,6 +503,8 @@
       $('r-address').value = s.address || '';
       $('r-organizer').value = s.organizer || '';
       $('r-title-input').value = s.title || '';
+      $('r-memo1').value = s.memo1 || '';
+      $('r-memo2').value = s.memo2 || '';
     }
     $('r-zoom').checked = !!s && kindOf(s) === 'zoom';
     syncZoom();
@@ -606,6 +627,8 @@
       address: $('r-address').value.trim(),
       organizer: $('r-organizer').value.trim(),
       title: $('r-title-input').value.trim(),
+      memo1: $('r-memo1').value.trim(), // 中の改行は残す（前後の空白だけ取る）
+      memo2: $('r-memo2').value.trim(),
       flyer: state.flyer ? { base64: state.flyer.base64, mimeType: state.flyer.mimeType } : null
     };
     var editing = state.edit;

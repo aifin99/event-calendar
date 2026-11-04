@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>イベントカレンダー</title>
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <div class="wrap">
@@ -60,6 +60,8 @@
       </div>
       <div class="field"><label for="r-organizer">主催者</label><input type="text" id="r-organizer"></div>
       <div class="field"><label for="r-title-input">イベント名<span class="req">必須</span></label><input type="text" id="r-title-input"></div>
+      <div class="field"><label for="r-memo1">メモ①</label><textarea id="r-memo1" rows="3" placeholder="参加費、持ち物、申込締切など"></textarea></div>
+      <div class="field"><label for="r-memo2">メモ②</label><textarea id="r-memo2" rows="3" placeholder="注意事項、連絡先など"></textarea></div>
       <div class="field">
         <label for="r-flyer">チラシ・広告</label>
         <div class="hint" id="r-flyer-current" hidden>今の画像はそのまま残ります。新しい画像を選ぶと差し替えます</div>
@@ -88,6 +90,6 @@
 </div>
 
 <script src="config.js"></script>
-<script src="app.js?v=1"></script>
+<script src="app.js?v=2"></script>
 </body>
 </html>

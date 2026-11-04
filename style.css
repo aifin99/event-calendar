@@ -127,6 +127,12 @@ a.link-btn {
 .card .organizer, .detail-head .organizer { font-size: 16px; overflow-wrap: anywhere; }
 .card .meta, .detail-head .meta { font-size: 13px; color: #4b5563; overflow-wrap: anywhere; }
 .card .count, .detail-head .count { font-size: 13px; color: #1e3a6e; }
+/* メモ①・②（詳細ページ。住所・URL の下、画像の上。改行はそのまま、HTML は解釈しない） */
+.memo h3 { font-size: 15px; margin: 14px 0 4px; color: #1e3a6e; }
+.memo .memo-body {
+  font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere;
+  background: #fff; border: 1px solid #e5e7eb; border-radius: 6px; padding: 8px 10px;
+}
 .flyer { width: 100%; height: auto; display: block; margin-top: 12px; border: 1px solid #e5e7eb; }
 .no-flyer { margin-top: 12px; padding: 24px 8px; text-align: center; background: #f3f4f6; color: #6b7280; border-radius: 6px; }
 .ended { margin-top: 12px; padding: 12px; text-align: center; background: #eceff3; color: #4b5563; font-weight: bold; border-radius: 6px; }
@@ -143,6 +149,10 @@ a.link-btn {
 .field input[type=text], .field input[type=date], .field input[type=time], .field input[type=password] {
   width: 100%; font-size: 16px; padding: 8px; border: 1px solid #c7cfdd; border-radius: 6px; background: #fff;
   font-family: inherit;
+}
+.field textarea {
+  display: block; width: 100%; font-size: 16px; padding: 8px; border: 1px solid #c7cfdd; border-radius: 6px; background: #fff;
+  font-family: inherit; line-height: 1.5; resize: vertical;
 }
 .field input[type=file] { width: 100%; font-size: 14px; }
 .btn.sub { background: #e5e7eb; color: #1f2937; margin-top: 8px; }
